@@ -4,6 +4,8 @@ const repository = require('./repository');
 function runTests(){
 
     var id = null;
+    var email = 'user@example.org';
+    var pwd = 'qwe';
 
     test('Repository GetAllMovies', (t) => {
         repository.getAllMovies((err, movies) => {
@@ -23,6 +25,25 @@ function runTests(){
 
         repository.getMovieById(id, (err, movie) => {
             t.assert(!err && movie, "Movie by Id Returned");
+            t.end();
+        });
+    })
+
+    test('Repository getUser', (t) => {
+        if(!email) {
+            t.assert(false, "getUser Returned");
+            t.end();
+            return;
+        }
+
+        if(!pwd) {
+            t.assert(false, "getUser Returned");
+            t.end();
+            return;
+        }
+
+        repository.getUser(email, pwd, (err, user) => {
+            t.assert(!err && user, "getUser Returned");
             t.end();
         });
     })
