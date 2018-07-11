@@ -24,8 +24,14 @@ function getMoviePremiers(callback){
     });
 }
 
+function getUser(email, pwd, callback){
+    mongodb.connect((err, db) => {
+        db.collection("user").findOne({ email:email, pwd:pwd}, callback);
+    });
+}
+
 function disconnect(){
     return mongodb.disconnect();
 }
 
-module.exports = { getAllMovies, getMovieById, getMoviePremiers, disconnect }
+module.exports = { getUser, getAllMovies, getMovieById, getMoviePremiers, disconnect }
